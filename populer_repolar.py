@@ -1,0 +1,32 @@
+name: Github Popüler Repo Listesi
+description: Bu betik, kullanıcının GitHub profiline yüklenen popüler repoların listesini alır.
+version: 1.0
+author: ChatGPT
+
+dependencies:
+  - requests
+  - PyYAML
+
+script:
+  # Gerekli kütüphaneler içeri aktarılıyor
+  import requests
+  import yaml
+  
+  # Kullanıcının GitHub kullanıcı adı alınır
+  username = input("GitHub kullanıcı adınızı girin: ")
+  
+  # GitHub API'sini kullanarak popüler repoların listesi alınır
+  response = requests.get(f"https://api.github.com/users/{username}/repos")
+  repos = response.json()
+  
+  # Popüler repo isimleri bir listede toplanır
+  popular_repos = []
+  for repo in repos:
+      if repo["stargazers_count"] >= 10:
+          popular_repos.append(repo["name"])
+  
+  # YAML dosyasına yazdırılır
+  with open("populer_repolar.yaml", "w") as f:
+      yaml.dump({"populer_repos": popular_repos}, f)
+  
+  print(f"Popüler repoların listesi 'populer_repolar.yaml' dosyasına yazdırıldı.")
