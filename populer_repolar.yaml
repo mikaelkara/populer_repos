@@ -1,7 +1,7 @@
 name: Github Popüler Repo Listesi
 description: Bu betik, kullanıcının GitHub profiline yüklenen popüler repoların listesini alır.
 version: 1.0
-author: ChatGPT
+author: Mikael KARA
 
 dependencies:
   - requests
@@ -16,7 +16,8 @@ script:
   username = input("GitHub kullanıcı adınızı girin: ")
   
   # GitHub API'sini kullanarak popüler repoların listesi alınır
-  response = requests.get(f"https://api.github.com/users/{username}/repos")
+  # response = requests.get(f"https://api.github.com/users/{username}/repos")
+  response = requests.get(f"https://api.github.com/users/{github}/repos")
   repos = response.json()
   
   # Popüler repo isimleri bir listede toplanır
